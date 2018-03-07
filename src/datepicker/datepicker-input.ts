@@ -67,6 +67,8 @@ export class NgbInputDatepicker implements OnChanges,
    * Reference for the custom template for the day display
    */
   @Input() dayTemplate: TemplateRef<DayTemplateContext>;
+      
+  @Input() autoClose = true;
 
   /**
    * Number of months to display
@@ -237,7 +239,9 @@ export class NgbInputDatepicker implements OnChanges,
       this._cRef.instance.registerOnChange((selectedDate) => {
         this.writeValue(selectedDate);
         this._onChange(selectedDate);
-        this.close();
+        if (this.autoClose) {
+         this.close();
+        }
       });
 
       // focus handling
@@ -315,7 +319,11 @@ export class NgbInputDatepicker implements OnChanges,
 
   private _subscribeForDatepickerOutputs(datepickerInstance: NgbDatepicker) {
     datepickerInstance.navigate.subscribe(date => this.navigate.emit(date));
-    datepickerInstance.select.subscribe(() => { this.close(); });
+    datepickerInstance.select.subscribe(() => { 
+      if (this.autoClose) {
+       this.close(); 
+      }
+    });
   }
 
   private _writeModelValue(model: NgbDate) {
