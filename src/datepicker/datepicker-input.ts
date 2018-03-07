@@ -67,7 +67,6 @@ export class NgbInputDatepicker implements OnChanges,
    * Reference for the custom template for the day display
    */
   @Input() dayTemplate: TemplateRef<DayTemplateContext>;
-      
   @Input() autoClose = true;
 
   /**
@@ -240,7 +239,7 @@ export class NgbInputDatepicker implements OnChanges,
         this.writeValue(selectedDate);
         this._onChange(selectedDate);
         if (this.autoClose) {
-         this.close();
+          this.close();
         }
       });
 
@@ -319,9 +318,9 @@ export class NgbInputDatepicker implements OnChanges,
 
   private _subscribeForDatepickerOutputs(datepickerInstance: NgbDatepicker) {
     datepickerInstance.navigate.subscribe(date => this.navigate.emit(date));
-    datepickerInstance.select.subscribe(() => { 
+    datepickerInstance.select.subscribe(() => {
       if (this.autoClose) {
-       this.close(); 
+        this.close();
       }
     });
   }
